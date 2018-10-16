@@ -1,0 +1,25 @@
+uuid: 2a291420-a6ae-4ce9-9fdc-6f4f6e6d56e7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_votos_a_favor
+    - node.type.votacion_proyecto_de_ley
+id: node.votacion_proyecto_de_ley.field_votos_a_favor
+field_name: field_votos_a_favor
+entity_type: node
+bundle: votacion_proyecto_de_ley
+label: 'votos a favor'
+description: 'Contabilización de votos a favor'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

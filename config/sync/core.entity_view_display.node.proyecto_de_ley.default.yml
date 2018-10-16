@@ -1,0 +1,96 @@
+uuid: 027a2916-6b0c-4850-98f7-e04f4da85e40
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.proyecto_de_ley.field_atestados
+    - field.field.node.proyecto_de_ley.field_descripcion
+    - field.field.node.proyecto_de_ley.field_estado
+    - field.field.node.proyecto_de_ley.field_fecha_iniciacion
+    - field.field.node.proyecto_de_ley.field_fecha_vencimiento
+    - field.field.node.proyecto_de_ley.field_numero_proyecto
+    - field.field.node.proyecto_de_ley.field_tema_de_interes
+    - field.field.node.proyecto_de_ley.field_tipo
+    - node.type.proyecto_de_ley
+  module:
+    - datetime
+    - file
+    - text
+    - user
+id: node.proyecto_de_ley.default
+targetEntityType: node
+bundle: proyecto_de_ley
+mode: default
+content:
+  field_atestados:
+    weight: 104
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    type: file_default
+    region: content
+  field_descripcion:
+    weight: 105
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_estado:
+    weight: 103
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_fecha_iniciacion:
+    weight: 108
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_fecha_vencimiento:
+    weight: 109
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_numero_proyecto:
+    weight: 106
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_tema_de_interes:
+    weight: 102
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_tipo:
+    weight: 107
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

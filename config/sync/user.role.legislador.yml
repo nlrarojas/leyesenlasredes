@@ -1,0 +1,27 @@
+uuid: 59716b7f-c862-44b8-aa7b-05bdb2ede477
+langcode: en
+status: true
+dependencies: {  }
+id: legislador
+label: Legislador
+weight: -7
+is_admin: null
+permissions:
+  - 'access content overview'
+  - 'create mis_temas_de_interes content'
+  - 'create proyecto_de_ley content'
+  - 'create terms in estado'
+  - 'create terms in temas_de_interes'
+  - 'create votacion_proyecto_de_ley content'
+  - 'delete any mis_temas_de_interes content'
+  - 'delete any proyecto_de_ley content'
+  - 'delete any votacion_proyecto_de_ley content'
+  - 'delete own mis_temas_de_interes content'
+  - 'delete own votacion_proyecto_de_ley content'
+  - 'delete terms in estado'
+  - 'delete terms in temas_de_interes'
+  - 'edit any mis_temas_de_interes content'
+  - 'edit any proyecto_de_ley content'
+  - 'edit any votacion_proyecto_de_ley content'
+  - 'edit terms in estado'
+  - 'edit terms in temas_de_interes'

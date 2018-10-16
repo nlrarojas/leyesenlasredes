@@ -1,0 +1,14 @@
+uuid: 93d4ae87-56f1-4f4b-b81e-f35794a104fa
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.legislador
+  module:
+    - user
+id: user_add_role_action.legislador
+label: 'Add the legislador role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: legislador

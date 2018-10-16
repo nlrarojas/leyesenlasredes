@@ -1,0 +1,9 @@
+uuid: 7e8ee58c-2d50-4628-ac38-2f3c1cbf7e32
+langcode: en
+status: true
+dependencies: {  }
+name: Tipo
+vid: tipo
+description: 'Tipo de proyecto de ley'
+hierarchy: 0
+weight: 0

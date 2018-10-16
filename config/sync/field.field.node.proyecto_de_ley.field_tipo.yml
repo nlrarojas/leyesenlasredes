@@ -1,0 +1,37 @@
+uuid: 8a8aad88-fa2c-4121-9969-3cf642ebfda1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tipo
+    - node.type.proyecto_de_ley
+    - taxonomy.vocabulary.tipo
+  module:
+    - unique_field_ajax
+third_party_settings:
+  unique_field_ajax:
+    unique: 0
+    per_lang: 0
+    use_ajax: 0
+    message: ''
+id: node.proyecto_de_ley.field_tipo
+field_name: field_tipo
+entity_type: node
+bundle: proyecto_de_ley
+label: Tipo
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      tipo: tipo
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,32 @@
+uuid: fcd26a7a-f48d-4905-87b2-3225c29bda4f
+langcode: en
+status: true
+dependencies:
+  module:
+    - facebook_comments
+    - node
+  theme:
+    - yorkshire
+id: facebookcomments
+theme: yorkshire
+region: content
+weight: 0
+provider: null
+plugin: facebook_comments
+settings:
+  id: facebook_comments
+  label: 'Facebook comments'
+  provider: facebook_comments
+  label_display: visible
+  facebook_comments_style: light
+  facebook_comments_width: '208'
+  facebook_comments_width_fluid: 0
+  facebook_comments_amount: '5'
+visibility:
+  node_type:
+    id: node_type
+    bundles:
+      votacion_proyecto_de_ley: votacion_proyecto_de_ley
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

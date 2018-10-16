@@ -1,0 +1,9 @@
+uuid: a7605526-4bda-4aa5-97f3-3acdc2fd6e90
+langcode: en
+status: true
+dependencies: {  }
+name: Estado
+vid: estado
+description: 'Estado de un proyecto de ley'
+hierarchy: 0
+weight: 0

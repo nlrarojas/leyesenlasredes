@@ -1,0 +1,27 @@
+uuid: 186eb066-cf10-4238-b2de-e52c69d975f1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_cedula
+  module:
+    - unique_field_ajax
+    - user
+third_party_settings:
+  unique_field_ajax:
+    unique: 1
+    per_lang: 0
+    use_ajax: 0
+    message: 'La cédula ya se encuentra registrada.'
+id: user.user.field_cedula
+field_name: field_cedula
+entity_type: user
+bundle: user
+label: cedula
+description: 'ID del usuario'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

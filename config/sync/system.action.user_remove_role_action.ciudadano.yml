@@ -1,0 +1,14 @@
+uuid: 58b48d03-ba39-4268-a16a-50c865be1da4
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.ciudadano
+  module:
+    - user
+id: user_remove_role_action.ciudadano
+label: 'Remove the Ciudadano role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: ciudadano

@@ -1,0 +1,20 @@
+uuid: f4ba6523-9983-4392-9448-0f6b0a6f143c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - node.type.mis_temas_de_interes
+  module:
+    - user
+id: node.mis_temas_de_interes.teaser
+targetEntityType: node
+bundle: mis_temas_de_interes
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

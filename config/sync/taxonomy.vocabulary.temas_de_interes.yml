@@ -1,0 +1,9 @@
+uuid: 57552b45-79ba-4bf1-9027-eb80b1bd4c1c
+langcode: en
+status: true
+dependencies: {  }
+name: 'Temas de interes'
+vid: temas_de_interes
+description: 'Categorías en que un proyecto de ley puede ser clasificado'
+hierarchy: 0
+weight: 0

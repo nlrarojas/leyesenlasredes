@@ -1,0 +1,14 @@
+uuid: ad00e0c5-36a6-4410-81f9-cfaa39aceea3
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.legislador
+  module:
+    - user
+id: user_remove_role_action.legislador
+label: 'Remove the legislador role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: legislador

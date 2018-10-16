@@ -1,0 +1,20 @@
+uuid: 1243d85d-463c-4283-a1ca-59b9f99544c1
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_votos_en_contra
+field_name: field_votos_en_contra
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,37 @@
+uuid: ee40551d-babe-4dec-8e40-468fb9211223
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tema
+    - node.type.mis_temas_de_interes
+    - taxonomy.vocabulary.temas_de_interes
+  module:
+    - unique_field_ajax
+third_party_settings:
+  unique_field_ajax:
+    unique: 0
+    per_lang: 0
+    use_ajax: 0
+    message: ''
+id: node.mis_temas_de_interes.field_tema
+field_name: field_tema
+entity_type: node
+bundle: mis_temas_de_interes
+label: tema
+description: 'Mi tema de interés'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      temas_de_interes: temas_de_interes
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,28 @@
+uuid: dec23b32-50f8-466f-a34e-4ac58201c84b
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.proyecto_de_ley.field_atestados
+    - field.field.node.proyecto_de_ley.field_descripcion
+    - field.field.node.proyecto_de_ley.field_estado
+    - field.field.node.proyecto_de_ley.field_tema_de_interes
+    - node.type.proyecto_de_ley
+  module:
+    - user
+id: node.proyecto_de_ley.teaser
+targetEntityType: node
+bundle: proyecto_de_ley
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_atestados: true
+  field_descripcion: true
+  field_estado: true
+  field_tema_de_interes: true

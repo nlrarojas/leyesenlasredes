@@ -1,0 +1,21 @@
+uuid: 192fb5d0-3ad6-403b-bdd5-4b9afacd85c5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_fecha_vencimiento
+    - node.type.proyecto_de_ley
+  module:
+    - datetime
+id: node.proyecto_de_ley.field_fecha_vencimiento
+field_name: field_fecha_vencimiento
+entity_type: node
+bundle: proyecto_de_ley
+label: 'Fecha vencimiento'
+description: 'Fecha de vencimiento del proyecto de ley. '
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

@@ -1,0 +1,36 @@
+uuid: a5513eaa-38d5-45d3-9697-6d77c7b5f1ad
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_usuario_tema
+    - node.type.mis_temas_de_interes
+  module:
+    - unique_field_ajax
+third_party_settings:
+  unique_field_ajax:
+    unique: 0
+    per_lang: 0
+    use_ajax: 0
+    message: ''
+id: node.mis_temas_de_interes.field_usuario_tema
+field_name: field_usuario_tema
+entity_type: node
+bundle: mis_temas_de_interes
+label: 'usuario tema'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: false
+    filter:
+      type: _none
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

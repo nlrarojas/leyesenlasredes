@@ -1,0 +1,21 @@
+uuid: bdbcdab6-3466-4ee3-abb9-890b30f8ef13
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_fecha_iniciacion
+    - node.type.proyecto_de_ley
+  module:
+    - datetime
+id: node.proyecto_de_ley.field_fecha_iniciacion
+field_name: field_fecha_iniciacion
+entity_type: node
+bundle: proyecto_de_ley
+label: 'Fecha iniciación'
+description: 'Fecha de inicio del proyecto de ley'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

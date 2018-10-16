@@ -1,0 +1,17 @@
+uuid: 44cab425-5ec7-4d68-a115-c7af5271ffa2
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'Mis temas de interés'
+type: mis_temas_de_interes
+description: 'Lista de temas de interés de un usuario'
+help: ''
+new_revision: true
+preview_mode: 0
+display_submitted: false

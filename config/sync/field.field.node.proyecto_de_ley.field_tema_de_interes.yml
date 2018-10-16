@@ -1,0 +1,29 @@
+uuid: 0d052166-98ee-498e-a3f5-4852edc3f85d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tema_de_interes
+    - node.type.proyecto_de_ley
+    - taxonomy.vocabulary.temas_de_interes
+id: node.proyecto_de_ley.field_tema_de_interes
+field_name: field_tema_de_interes
+entity_type: node
+bundle: proyecto_de_ley
+label: 'Temas de interés'
+description: 'Categorías en las que clasifica el proyecto de ley'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      temas_de_interes: temas_de_interes
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

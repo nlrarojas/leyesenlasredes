@@ -1,0 +1,21 @@
+uuid: c5ca4849-0e15-49bf-83d9-effa41775db7
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+id: user.field_cedula
+field_name: field_cedula
+entity_type: user
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

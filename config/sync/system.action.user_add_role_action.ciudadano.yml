@@ -1,0 +1,14 @@
+uuid: 44bc2294-06db-4770-9cc7-1b6d293a1764
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.ciudadano
+  module:
+    - user
+id: user_add_role_action.ciudadano
+label: 'Add the Ciudadano role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: ciudadano

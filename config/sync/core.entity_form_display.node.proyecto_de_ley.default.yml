@@ -1,0 +1,103 @@
+uuid: 68acbacc-3cd2-4077-9a6b-a161351d9cf0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.proyecto_de_ley.field_atestados
+    - field.field.node.proyecto_de_ley.field_descripcion
+    - field.field.node.proyecto_de_ley.field_estado
+    - field.field.node.proyecto_de_ley.field_fecha_iniciacion
+    - field.field.node.proyecto_de_ley.field_fecha_vencimiento
+    - field.field.node.proyecto_de_ley.field_numero_proyecto
+    - field.field.node.proyecto_de_ley.field_tema_de_interes
+    - field.field.node.proyecto_de_ley.field_tipo
+    - node.type.proyecto_de_ley
+  module:
+    - datetime
+    - file
+    - path
+    - text
+id: node.proyecto_de_ley.default
+targetEntityType: node
+bundle: proyecto_de_ley
+mode: default
+content:
+  field_atestados:
+    weight: 8
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: file_generic
+    region: content
+  field_descripcion:
+    weight: 7
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea_with_summary
+    region: content
+  field_estado:
+    weight: 6
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_fecha_iniciacion:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_fecha_vencimiento:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_numero_proyecto:
+    weight: 0
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_tema_de_interes:
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_tipo:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  path:
+    type: path
+    weight: 9
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 10
+    region: content
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  promote: true
+  sticky: true
+  uid: true

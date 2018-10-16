@@ -1,0 +1,10 @@
+manage_content_relations:
+  version: 1.x
+  js:
+    js/script.js: {}
+  css:
+    css/styles.css: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupal.dialog.ajax

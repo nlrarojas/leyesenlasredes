@@ -1,0 +1,20 @@
+uuid: 3c6c183a-83bd-42ee-b0c1-f73262166b2f
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_numero_proyecto
+field_name: field_numero_proyecto
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

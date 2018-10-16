@@ -1,0 +1,37 @@
+uuid: a2e4c66a-f971-4ee1-9146-089c204a89c4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.proyecto_seguido.field_proyecto_seguido
+    - field.field.node.proyecto_seguido.field_usuario
+    - node.type.proyecto_seguido
+  module:
+    - user
+id: node.proyecto_seguido.default
+targetEntityType: node
+bundle: proyecto_seguido
+mode: default
+content:
+  field_proyecto_seguido:
+    weight: 101
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_usuario:
+    weight: 102
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

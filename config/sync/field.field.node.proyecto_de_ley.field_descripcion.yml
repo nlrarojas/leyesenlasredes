@@ -1,0 +1,22 @@
+uuid: 45d931ec-6463-4a23-97de-7cdb8c40aafb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_descripcion
+    - node.type.proyecto_de_ley
+  module:
+    - text
+id: node.proyecto_de_ley.field_descripcion
+field_name: field_descripcion
+entity_type: node
+bundle: proyecto_de_ley
+label: Descripción
+description: 'Descripción de un proyecto de ley y su resumen. '
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

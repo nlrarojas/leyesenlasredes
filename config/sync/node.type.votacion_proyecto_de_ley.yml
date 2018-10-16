@@ -1,0 +1,18 @@
+uuid: e36b8561-a33b-4754-835d-0a32e8bced4a
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: 'Votacion proyecto de ley'
+type: votacion_proyecto_de_ley
+description: 'Votación con comentarios de un proyecto de ley. '
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: true

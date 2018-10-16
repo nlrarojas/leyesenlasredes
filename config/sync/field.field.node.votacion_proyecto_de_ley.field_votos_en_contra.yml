@@ -1,0 +1,25 @@
+uuid: ea30c9c9-1100-4f82-80d2-edfd698fbdf9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_votos_en_contra
+    - node.type.votacion_proyecto_de_ley
+id: node.votacion_proyecto_de_ley.field_votos_en_contra
+field_name: field_votos_en_contra
+entity_type: node
+bundle: votacion_proyecto_de_ley
+label: 'votos en contra'
+description: 'Contabilización de votos en contra'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

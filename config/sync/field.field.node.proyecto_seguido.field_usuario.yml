@@ -1,0 +1,28 @@
+uuid: 8739a96f-b8d8-483f-b8d2-d337b76ce05c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_usuario
+    - node.type.proyecto_seguido
+id: node.proyecto_seguido.field_usuario
+field_name: field_usuario
+entity_type: node
+bundle: proyecto_seguido
+label: usuario
+description: 'Usuario que sigue un proyecto'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: false
+    filter:
+      type: _none
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

@@ -1,0 +1,9 @@
+uuid: 03796ca5-aaa4-435f-bad5-a8223681aa9e
+langcode: en
+status: true
+dependencies: {  }
+id: ciudadano
+label: Ciudadano
+weight: -6
+is_admin: null
+permissions: {  }

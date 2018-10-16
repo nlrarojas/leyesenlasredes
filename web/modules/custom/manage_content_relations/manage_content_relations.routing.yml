@@ -1,0 +1,7 @@
+bid.form_confirmation_trucker_modal:
+  path: '/call/ajax/manage_content_relations'
+  defaults:
+    _title: 'Add tema de interes to users preferences'
+    _controller: '\Drupal\manage_content_relations\Controller\AddUserInterestTopic::addTopic'
+  requirements:
+    _access: 'TRUE'

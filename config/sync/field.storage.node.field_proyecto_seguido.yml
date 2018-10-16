@@ -1,0 +1,19 @@
+uuid: abf387fd-8558-479b-9aa7-5b88e6914e4b
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_proyecto_seguido
+field_name: field_proyecto_seguido
+entity_type: node
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

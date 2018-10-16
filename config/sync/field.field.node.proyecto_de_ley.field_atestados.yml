@@ -1,0 +1,27 @@
+uuid: 614ccada-ddb3-4278-afdc-03f1c4d23871
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_atestados
+    - node.type.proyecto_de_ley
+  module:
+    - file
+id: node.proyecto_de_ley.field_atestados
+field_name: field_atestados
+entity_type: node
+bundle: proyecto_de_ley
+label: Documentos
+description: 'Documentos oficiales que sustentan los proyectos o iniciativas de ley. '
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'txt doc docx pdf xls xlsx ppt pptx'
+  max_filesize: ''
+  description_field: true
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

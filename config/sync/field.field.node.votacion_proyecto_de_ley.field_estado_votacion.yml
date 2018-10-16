@@ -1,0 +1,29 @@
+uuid: a1d72d98-fff8-480a-a533-cb1f23e230af
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_estado_votacion
+    - node.type.votacion_proyecto_de_ley
+    - taxonomy.vocabulary.estado
+id: node.votacion_proyecto_de_ley.field_estado_votacion
+field_name: field_estado_votacion
+entity_type: node
+bundle: votacion_proyecto_de_ley
+label: estado
+description: 'Estado de la votación'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      estado: estado
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

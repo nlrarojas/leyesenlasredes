@@ -1,0 +1,28 @@
+uuid: 953a5998-0290-4d1a-9e02-a347fe7793c6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_proyecto
+    - node.type.proyecto_de_ley
+    - node.type.votacion_proyecto_de_ley
+id: node.votacion_proyecto_de_ley.field_proyecto
+field_name: field_proyecto
+entity_type: node
+bundle: votacion_proyecto_de_ley
+label: proyecto
+description: 'Proyecto de ley acerca del cual se realiza la votación'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      proyecto_de_ley: proyecto_de_ley
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

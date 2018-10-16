@@ -1,0 +1,23 @@
+uuid: 3229ea51-c26e-40ff-a26b-04cf06024e5a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_numero_proyecto
+    - node.type.proyecto_de_ley
+id: node.proyecto_de_ley.field_numero_proyecto
+field_name: field_numero_proyecto
+entity_type: node
+bundle: proyecto_de_ley
+label: 'Número de proyecto'
+description: 'Identificador del proyecto de ley'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

@@ -1,0 +1,28 @@
+uuid: f1945237-8e27-48e7-9001-dbd2aad613f5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_proyecto_seguido
+    - node.type.proyecto_de_ley
+    - node.type.proyecto_seguido
+id: node.proyecto_seguido.field_proyecto_seguido
+field_name: field_proyecto_seguido
+entity_type: node
+bundle: proyecto_seguido
+label: proyecto_seguido
+description: 'Proyecto al que un usuario seguido'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      proyecto_de_ley: proyecto_de_ley
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

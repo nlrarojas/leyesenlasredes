@@ -1,0 +1,5 @@
+name: 'my-sport-styles'
+type: module
+description: 'This module is only for fix problems with Admin LTE Theme'
+core: 8.x
+package: 'Custom'

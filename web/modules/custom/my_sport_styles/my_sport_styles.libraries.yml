@@ -1,0 +1,4 @@
+general_style:
+  css:
+    theme:
+      css/main-header.css: {}

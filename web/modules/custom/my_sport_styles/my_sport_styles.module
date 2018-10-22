@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * @file
+ * Contains my_sport_styles.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function my_sport_styles_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the my_sport_styles module.
+    case 'help.page.my_sport_styles':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This module is only for fix problems with Admin LTE Theme') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements page_attachments() function.
+ *
+ * @param array $page
+ *   Array with page information.
+ */
+function my_sport_styles_page_attachments(array &$page) {
+  $page['#attached']['library'][] = 'my_sport_styles/general_style';
+}

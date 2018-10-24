@@ -1,0 +1,344 @@
+<?php
+
+/**
+ * @file
+ * Contains bid.module.
+ */
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\node\Entity\Node;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Url;
+use Drupal\Core\Link;
+use Drupal\Component\Serialization\Json;
+
+/**
+ * Implements hook_help().
+ */
+function bid_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the bid module.
+    case 'help.page.bid':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Bid features') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_page_attachments().
+ */
+function bid_page_attachments(array &$attachments) {
+  $attachments['#attached']['library'][] = 'bid/bid';
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function bid_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+
+  $current_node = \Drupal::routeMatch()->getParameter('node');
+  if(isset($current_node) && $form_id == 'node_oferta_form' && $current_node->getType() == 'carga' ) {
+    $form['field_ofert_carga']['#attributes']['class'][] = 'hidden';
+    $form['revision_information']['#attributes']['class'][] = 'hidden';
+    $form['actions']['submit']['#submit'][] = 'bi_form_ofertas_submit';
+    $form['actions']['submit']['#value'] = t("Publicar Oferta");
+    $form['actions']['submit']['#attributes']['class'][] = 'btn-success';
+
+    // Cancel button just when edit node oferta.
+    if (isset($_GET['op']) && $_GET['op'] == 'edit') {
+      // Adding Cancel button.
+      $current_path = \Drupal::service('path.current')->getPath();
+      $form['actions']['cancel'] = array(
+        '#markup' => '<a href="' . $current_path . '">' . t("Cancelar") . '</a>',
+        '#weight' => 20,
+      );
+    }
+  }
+
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function bid_node_insert(Drupal\Core\Entity\EntityInterface $entity) {
+
+  // Drupal Message when node oferta is created.
+  if($entity->getType() == "oferta"){
+
+    // Node Carga ID.
+    $id_node_carga = $entity->get('field_ofert_carga')->target_id;
+
+    /** @var \Drupal\Node\Entity\Node $node_oferta */
+    $node_oferta = Node::load($id_node_carga);
+
+    // Node Carga Title.
+    $title = $node_oferta->getTitle();
+
+    drupal_set_message("Se ha publicado tu oferta a " . $title);
+  }
+}
+
+
+
+/**
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ */
+function bi_form_ofertas_submit(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  $current_node = \Drupal::routeMatch()->getParameter('node');
+
+  if (isset($_SESSION['messages'])) {
+    // Clean the default message when node oferta is created..
+    unset($_SESSION['messages']['status'][1]);
+  }
+
+    $form_state->setRedirect('entity.node.canonical', ['node' => $current_node->id()]
+  );
+}
+
+/**
+ * @param $variables
+ */
+function bid_preprocess_views_view_field(&$variables){
+
+  $view = $variables['view'];
+  $id = $view->storage->id();
+
+  // Value to show in the twig.
+  $field_custom_text = "default";
+// cargas_bids
+  switch ($id){
+    case 'ofertas_de_cargas':
+
+      /** @var \Drupal\views\Plugin\views\field\EntityField $field */
+      $field = $variables['field'];
+
+      //  Field label
+      $label = $field->label();
+
+      if($label == "Accion") {
+
+        $row = $variables['row'];
+
+        // Getting the node carga.
+        $carga_id = $variables["view"]->args[0];
+        $node_carga = Node::load($carga_id);
+
+        //Getting the node oferta of this carga.
+        $oferta_id = $row->_entity->get('nid')->value;
+        $node_oferta = Node::load($oferta_id);
+
+        $last_revision_state_carga = '';
+
+        // Check if we are viewing the default revision.
+        if ($node_oferta->isDefaultRevision() == TRUE) {
+
+          // Get all of the revision ids.
+          $revision_ids = \Drupal::entityTypeManager()->getStorage('node')->revisionIds($node_oferta);
+          //$current_revision_id = $node->getRevisionId();
+
+          // Check if the last item in the revisions is the loaded one.
+          $last_revision_id = end($revision_ids);
+
+          if ($node_oferta->getRevisionId() != $last_revision_id) {
+            // Load the revision.
+            $last_revision = \Drupal::entityTypeManager()->getStorage('node')->loadRevision($last_revision_id);
+            // Get the revisions moderation state.
+            $last_revision_state = $last_revision->get('moderation_state')->getString();
+          }
+        }
+
+        // Check if we are viewing the default revision.
+        if ($node_carga->isDefaultRevision() == TRUE) {
+
+          // Get all of the revision ids.
+          $revision_ids = \Drupal::entityTypeManager()->getStorage('node')->revisionIds($node_carga);
+          //$current_revision_id = $node->getRevisionId();
+
+          // Check if the last item in the revisions is the loaded one.
+          $last_revision_id = end($revision_ids);
+
+          if ($node_oferta->getRevisionId() != $last_revision_id) {
+            // Load the revision.
+            $last_revision = \Drupal::entityTypeManager()->getStorage('node')->loadRevision($last_revision_id);
+            // Get the revisions moderation state.
+            $last_revision_state_carga = $last_revision->get('moderation_state')->getString();
+          }
+        }
+
+        if ($node_oferta != NULL) {
+          if ($last_revision_state_carga != "published") {
+            // Empty does not show "Seleccionar oferta".
+            $field_custom_text = "empty";
+
+            if ($last_revision_state == 'oferta_nominada') {
+              $field_custom_text = "Nominado";
+            }
+
+            if ($last_revision_state == 'oferta_aceptada') {
+              $field_custom_text = "Aceptado";
+            }
+          }
+        }
+        $variables['field_custom_text'] = $field_custom_text;
+      }
+      break;
+    default:
+      break;
+  }
+}
+
+/**
+ * Implements hook_cron().
+ */
+function bid_cron() {
+  bid_RFQ_checker();
+  bid_expired_oferta_checker();
+}
+
+/**
+ * Implements hook_theme_registry_alter().
+ */
+function bid_theme_registry_alter(&$theme_registry) {
+  $theme_registry['views_view_field']['path'] = drupal_get_path('module', 'bid') . '/templates/views';
+}
+
+/**
+ * This method is to validate if availability date is greater than today
+ * In all the Requests for Quotation.
+ *
+ */
+function bid_RFQ_checker(){
+
+  $message = "Checking the dates...";
+
+  \Drupal::logger('BID')->notice($message);
+
+  $entity_type ="carga";
+
+  $query = \Drupal::entityQuery('node')->condition('type',$entity_type);
+  $nids = $query->execute();
+
+  if(!empty($nids)) {
+    $storage_handler = \Drupal::entityTypeManager()->getStorage('node');
+    $entities = $storage_handler->loadMultiple($nids);
+
+    foreach ($entities as $entity){
+
+      // Today date
+      $today = date('Y-m-d') ;
+
+      // End Date
+      $field_carga_dates = $entity->get('field_carga_dates')->end_value;
+
+      // DateTime
+      $today_dt = new DateTime($today);
+      $expire_dt = new DateTime($field_carga_dates);
+
+      if ($entity->isDefaultRevision() == TRUE) {
+
+        // Get all of the revision ids.
+        $revision_ids = \Drupal::entityTypeManager()->getStorage('node')->revisionIds($entity);
+        //$current_revision_id = $node->getRevisionId();
+
+        // Check if the last item in the revisions is the loaded one.
+        $last_revision_id = end($revision_ids);
+
+        if ($entity->getRevisionId() != $last_revision_id) {
+          // Load the revision.
+          $last_revision = \Drupal::entityTypeManager()->getStorage('node')->loadRevision($last_revision_id);
+          // Get the revisions moderation state.
+          $last_revision_oferta = $last_revision->get('moderation_state')->getString();
+        } else {
+          $last_revision_oferta = $entity->get('moderation_state')->value;
+        }
+      }
+
+      if (($expire_dt <  $today_dt) && ($entity->get('moderation_state')->value == 'published' && $last_revision_oferta == 'published')) {
+        $message_date = "Today : ". $today . " is greater than End Date ". $field_carga_dates. " the RFQ number ".$entity->id() . " will be closed.";
+        \Drupal::logger('BID')->notice($message_date);
+        $new_state = "carga_cerrada";
+        $entity->set('moderation_state', $new_state);
+        $entity->save();
+      }
+    }
+  }
+}
+
+function bid_expired_oferta_checker() {
+  $message = "Checking the dates...";
+
+  \Drupal::logger('BID')->notice($message);
+
+  $entity_type ="oferta";
+
+  $query = \Drupal::entityQuery('node')->condition('type',$entity_type);
+  $nids = $query->execute();
+
+  if(!empty($nids)) {
+    $storage_handler = \Drupal::entityTypeManager()->getStorage('node');
+    $entities = $storage_handler->loadMultiple($nids);
+
+    foreach ($entities as $entity){
+
+      // Today date
+      $today = date("Y-m-d H:i:s", strtotime("now"));
+      $todayExpire = date("Y-m-d H:i:s", strtotime("now" . "-2 days"));
+
+      // End Date
+      $ofertaCreatedDate = date("Y-m-d H:i:s", $entity->getCreatedTime());
+
+      if ($entity->isDefaultRevision() == TRUE) {
+
+        // Get all of the revision ids.
+        $revision_ids = \Drupal::entityTypeManager()->getStorage('node')->revisionIds($entity);
+        //$current_revision_id = $node->getRevisionId();
+
+        // Check if the last item in the revisions is the loaded one.
+        $last_revision_id = end($revision_ids);
+
+        if ($entity->getRevisionId() != $last_revision_id) {
+          // Load the revision.
+          $last_revision = \Drupal::entityTypeManager()->getStorage('node')->loadRevision($last_revision_id);
+          // Get the revisions moderation state.
+          $last_revision_oferta = $last_revision->get('moderation_state')->getString();
+        } else {
+          $last_revision_oferta = $entity->get('moderation_state')->value;
+        }
+      }
+
+      if (($ofertaCreatedDate <=  $todayExpire) && ($entity->get('moderation_state')->value == 'published' && ($last_revision_oferta == 'published' || $last_revision_oferta == "oferta_nominada"))) {
+        $message_date = "Today : ". $today . " is greater than End Date ". $ofertaCreatedDate. " the RFQ number ".$entity->id() . " will be closed.";
+        \Drupal::logger('BID')->notice($message_date);
+        $new_state = "oferta_expirada";
+        $entity->set('moderation_state', $new_state);
+        $entity->save();
+      }
+    }
+  }
+}
+
+function bid_entity_presave(Drupal\Core\Entity\EntityInterface $entity) {
+  if ($entity->id() == null) {
+    if (method_exists($entity,'getType')) {
+      if ($entity->getType() == "carga" || $entity->getType() == "oferta") {
+        if ($entity->get('moderation_state')->value == 'draft'){
+          $new_state = "published";
+          $entity->set('moderation_state', $new_state);
+        }
+      }
+    }
+  } else if ($entity->id() != null) {
+    if (method_exists($entity,'getType')) {
+      if ($entity->getType() == "carga" || $entity->getType() == "oferta") {
+        if ($entity->get('moderation_state')->value == 'draft'){
+          $new_state = "published";
+          $entity->set('moderation_state', $new_state);
+        }
+      }
+    }
+  }
+}

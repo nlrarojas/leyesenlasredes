@@ -1,0 +1,40 @@
+bid.current_options_form:
+  path: '/bid/form/current_options'
+  defaults:
+    _form: '\Drupal\bid\Form\CurrentOptionsForm'
+    _title: 'CurrentOptionsForm'
+  requirements:
+    _access: 'TRUE'
+
+
+bid.form_confirmation_trucker:
+  path: '/bid/form/form_confirmation_trucker'
+  defaults:
+    _form: '\Drupal\bid\Form\FormConfirmationTrucker'
+    _title: 'FormConfirmationTrucker'
+  requirements:
+    _access: 'TRUE'
+
+bid.form_confirmation_trucker_modal:
+  path: '/call/ajax/bid'
+  defaults:
+    _title: 'Modal Confirm Trucker'
+    _controller: '\Drupal\bid\Controller\ModalFormConfirmationTruckerController::confirmTrucker'
+  requirements:
+    _access: 'TRUE'
+
+bid.form_accept_nomination_trucker_modal:
+  path: '/call/ajax/accept-nomination'
+  defaults:
+    _title: 'Modal Accept Nomination Trucker'
+    _controller: '\Drupal\bid\Controller\ModalFormConfirmationTruckerController::acceptNominationTrucker'
+  requirements:
+    _access: 'TRUE'
+
+bid.form_reject_nomination_trucker_modal:
+  path: '/call/ajax/reject-nomination'
+  defaults:
+    _title: 'Modal Reject Nomination Trucker'
+    _controller: '\Drupal\bid\Controller\ModalFormConfirmationTruckerController::rejectNominationTrucker'
+  requirements:
+    _access: 'TRUE'

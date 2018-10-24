@@ -1,0 +1,5 @@
+name: Flete Bid workflow
+type: module
+description: Bid features
+core: 8.x
+package: Flete

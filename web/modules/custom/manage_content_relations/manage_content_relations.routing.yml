@@ -1,5 +1,5 @@
-bid.form_confirmation_trucker_modal:
-  path: '/call/ajax/manage_content_relations'
+bid.form_add_topic:
+  path: '/call/ajax/reject-nomination'
   defaults:
     _title: 'Add tema de interes to users preferences'
     _controller: '\Drupal\manage_content_relations\Controller\AddUserInterestTopic::addTopic'

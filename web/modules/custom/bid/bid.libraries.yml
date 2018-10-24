@@ -1,10 +1,7 @@
-manage_content_relations:
+bid:
   version: 1.x
   js:
     js/script.js: {}
-  css:
-    theme:
-      css/styles.css: {}
   dependencies:
     - core/jquery
     - core/jquery.once

@@ -1,17 +1,15 @@
-uuid: 87ad756b-6d83-4346-98d8-81963705f4ce
+uuid: f85deb0c-a170-4736-8c88-f1a9403e796b
 langcode: en
 status: true
 dependencies:
   config:
-    - node.type.mis_temas_de_interes
-    - user.role.administrator
-    - user.role.ciudadano
-    - views.view.temas_de_interes
+    - node.type.proyecto_seguido
+    - views.view.proyectos_ciudadano
   module:
     - node
     - user
-id: mis_temas_de_interes
-label: 'Mis temas de interés'
+id: proyectos_seguidos
+label: 'Proyectos seguidos'
 module: views
 description: ''
 tag: ''
@@ -26,11 +24,9 @@ display:
     position: 0
     display_options:
       access:
-        type: role
+        type: perm
         options:
-          role:
-            administrator: administrator
-            ciudadano: ciudadano
+          perm: 'access content'
       cache:
         type: tag
         options: {  }
@@ -122,55 +118,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        nothing:
-          id: nothing
-          table: views
-          field: nothing
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: Acciones
-          exclude: false
-          alter:
-            alter_text: true
-            text: '<a class="use-ajax button" id="stopFollowingButton" data-project={{ nid }} href="#">Dejar de seguir</a>'
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: false
-          plugin_id: custom
       filters:
         status:
           value: '1'
@@ -188,12 +135,27 @@ display:
           table: node_field_data
           field: type
           value:
-            mis_temas_de_interes: mis_temas_de_interes
+            proyecto_seguido: proyecto_seguido
           entity_type: node
           entity_field: type
           plugin_id: bundle
-      sorts: {  }
-      title: 'Mis temas de interés'
+      sorts:
+        created:
+          id: created
+          table: node_field_data
+          field: created
+          order: DESC
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+          relationship: none
+          group_type: group
+          admin_label: ''
+          exposed: false
+          expose:
+            label: ''
+          granularity: second
+      title: 'Proyectos seguidos'
       header: {  }
       footer:
         view:
@@ -204,7 +166,7 @@ display:
           group_type: group
           admin_label: ''
           empty: true
-          view_to_insert: 'temas_de_interes:block_1'
+          view_to_insert: 'proyectos_ciudadano:block_1'
           inherit_arguments: true
           plugin_id: view
       empty: {  }
@@ -218,7 +180,7 @@ display:
         - 'languages:language_interface'
         - url.query_args
         - 'user.node_grants:view'
-        - user.roles
+        - user.permissions
       tags: {  }
   page_1:
     display_plugin: page
@@ -227,7 +189,7 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      path: mis_temas_interes
+      path: proyectos_seguidos
     cache_metadata:
       max-age: -1
       contexts:
@@ -235,5 +197,5 @@ display:
         - 'languages:language_interface'
         - url.query_args
         - 'user.node_grants:view'
-        - user.roles
+        - user.permissions
       tags: {  }

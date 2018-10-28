@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Drupal\node\Entity\Node;
 use Drupal\user\Entity\User;
-
+use Drupal\taxonomy\Entity\Term;
 
 class ModalFormConfirmationTruckerController extends ControllerBase {
 
@@ -17,39 +17,28 @@ class ModalFormConfirmationTruckerController extends ControllerBase {
    * @return \Symfony\Component\HttpFoundation\Response
    */
   public function confirmTrucker(Request $request) {
-
     if ($request->isXmlHttpRequest()) {
       $response = new JsonResponse();
 
       $cargaID = $request->request->get('carga');
-      $ofertaId = $request->request->get('nominado');
+      $ofertaId = null;
 
-      $node_bid = Node::load($cargaID);
+      $topic = Term::load($cargaID);
 
-      $trucker = $this->getTruckerUser($ofertaId);
+      $uid = \Drupal::currentUser()->id();
+      $user = User::load($uid);
 
-      $nodeOferta = Node::load($ofertaId);
+      $node = Node::create([
+        'type' => 'mis_temas_de_interes',
+        'title' => $topic->getName(),        
+        'field_tema' => $topic,
+        'field_usuario_tema' => $user,
+      ]);  
 
-      //Get the user author oferta
-      $transportista_id = $nodeOferta->getOwnerId();
-      $transportista_profile = $current_user = User::load($transportista_id);
-      // Check if user already has a company and phone info.
-      $profileInfo = views_get_view_result('get_profile_info', 'default', $transportista_id);
-
-      $fieldProfCompEmpresa = '';
-      $fieldPriceOfert = $nodeOferta->get('field_ofert_precio')->value;
-
-      foreach ($profileInfo as $current_profile){
-          if ($current_profile->_entity->hasField('field_prof_comp_empresa')){
-              $fieldProfCompEmpresa = $current_profile->_entity->get('field_prof_comp_empresa')->value;
-          }
-      }
-
-      if ($trucker) {
-        drupal_set_message("La oferta de ".$fieldProfCompEmpresa." por $".$fieldPriceOfert." ha sido aceptada. El transportista confirmara que puede realizar el flete en menos de 24 horas");
-        $this->update_node($node_bid, $ofertaId);
-      }
-
+      $node->save();
+          
+      drupal_set_message("Ahora estas siguiente el tema: " . $topic->getName());
+      
       return $response;
     }
   }
@@ -111,45 +100,11 @@ class ModalFormConfirmationTruckerController extends ControllerBase {
     if ($request->isXmlHttpRequest()) {
       $response = new JsonResponse();
 
-      $cargaID = $request->request->get('carga');
-      $nodeCarga = Node::load($cargaID);
-      $ofertaId = $nodeCarga->get('field_carga_ofert')->first()->getValue()['target_id'];
-      $nodeOferta = Node::load($ofertaId);
-
-      $trucker = $this->getTruckerUser($ofertaId);
-
-      $ofertList = views_get_view_result('ofertas_de_cargas', 'block_2', $cargaID);
-      foreach ($ofertList as $ofert) {
-        $ofertListId = $ofert->_entity->id();
-        if ($ofertListId != $ofertaId) {
-          $ofertNode = Node::load($ofertListId);
-          $ofertNode->get('moderation_state')->value = 'oferta_no_nominada';
-          $ofertNode->save();
-        }
-      }
-
-      dump($nodeCarga);
-      dump($nodeCarga->get('field_carga_ofert'));
-
-      if ($trucker) {
-        //$this->update_node($node_bid, $ofertaId);
-        // Published is carga_abierta state
-
-
-        if ($nodeCarga->get('moderation_state')->value == 'published'){
-          $new_state = "carga_aceptada";
-          $nodeCarga->set('moderation_state', $new_state);
-          $nodeCarga->save();
-        }
-
-        if ($nodeOferta->get('moderation_state')->value == 'oferta_nominada'){
-          $new_state = "oferta_aceptada";
-          $nodeOferta->set('moderation_state', $new_state);
-          $nodeOferta->save();
-        }
-
-        drupal_set_message("Usted ha confirmado la oferta al embarcador. Puede contactarlo para coordinar el flete. ");
-      }
+      $topicID = $request->request->get('carga');
+      $nodeTopic = Node::load($topicID);
+      $nodeTopic->delete();
+      
+      drupal_set_message("Has dejado de seguir el tema: " . $nodeTopic->title());
 
       return $response;
     }

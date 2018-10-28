@@ -21,107 +21,45 @@
       }).showModal();
     });*/
 
-    $(document).on("click", "#submit-confirmation-trucker", function (event) {
+    $(document).on("click", "#follow-topic", function (event) {
       event.preventDefault();
 
-      const carga = $(this).data("carga");
-      const nominado = $(this).data("nominado");
+      const topic = $(this).data("topic");      
 
       $.ajax({
         url: '/call/ajax/bid',
         type: 'POST',
         data: {
-          carga: carga,
-          nominado: nominado
+          carga: topic
         },
-        success: function (response) {
-          $('button.close').click();
+        success: function (response) {             
           location.reload();
         },
-        error: function (response) {
-          $('button.close').click();
-          alert('Hubo un error inesperado intentar más tarde');
+        error: function (response) {          
+          alert('Hubo un error inesperado intentar más tarde');          
         }
       });
     });
 
-    $(document).on("click", "#cancel-confirmation-trucker", function (event) {
-      event.preventDefault();
-      $('button.close').click();
-    });
-
-    $(".btn-accept-nomination-trucker").on("click", function (event) {
+    $(document).on("click", "#unfollow-topic", function (event) {
       event.preventDefault();
 
-      const carga = $(this).data("carga");
-      const title = $(this).data("question");
-      const content = $(this).data("content");
-
-      const $myDialog = $('<div><form class="form-accept-nomination-trucker-popup" action="" method="post" id="form-accept-nomination-trucker-popup" accept-charset="UTF-8">\n' +
-          '  <button class="button js-form-submit form-submit btn-danger btn" type="button" data-carga="' + carga + '" id="cancel-accept-nomination-trucker" name="op" value="No">\n' +
-          '  No\n' +
-          '  </button>\n' +
-          '  <button class="button js-form-submit form-submit btn-success btn" type="button" data-carga="' + carga + '" id="submit-accept-nomination-trucker" name="op" value="Si">Si</button>\n' +
-          '  <p>'+ content +'</p>'+
-          '</form></div>').appendTo('body');
-      Drupal.dialog($myDialog, {
-        title: '¿Desea confirmar la oferta al embarcador?'
-      }).showModal();
-    });
-
-    $(document).on("click", "#submit-accept-nomination-trucker", function (event) {
-      event.preventDefault();
-
-      const carga = $(this).data("carga");
-      const nominado = $(this).data("nominado");
+      const topic = $(this).data("topic");      
 
       $.ajax({
         url: '/call/ajax/accept-nomination',
         type: 'POST',
         data: {
-          carga: carga,
-          nominado: nominado
+          carga: topic          
         },
         success: function (response) {
-          $('button.close').click();
+          alert("Dejo de seguir el tema de interes");          
           location.reload();
         },
-        error: function (response) {
-          $('button.close').click();
+        error: function (response) {          
           alert('Hubo un error inesperado intentar más tarde');
         }
       });
     });
-
-    $(document).on("click", "#cancel-accept-nomination-trucker", function (event) {
-      event.preventDefault();
-
-      const carga = $(this).data("carga");
-      const nominado = $(this).data("nominado");
-
-      $.ajax({
-        url: '/call/ajax/reject-nomination',
-        type: 'POST',
-        data: {
-          carga: carga,
-          nominado: nominado
-        },
-        success: function (response) {
-          $('button.close').click();
-          location.reload();
-        },
-        error: function (response) {
-          $('button.close').click();
-          alert('Hubo un error inesperado intentar más tarde');
-        }
-      });
-    });
-  });
-  if ($(window).width() < 768) {
-    $("#content_left").before($("#content_right"));
-    $("#content_left").addClass("map_margin");
-  } else {
-    $("#content_right").before($("#content_left"));
-    $("#content_left").removeClass("map_margin");
-  }
+  });  
 }(jQuery, Drupal));

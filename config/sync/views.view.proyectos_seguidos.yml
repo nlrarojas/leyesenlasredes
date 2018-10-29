@@ -213,7 +213,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a class="use-ajax button" data-project="{{ nid }}" data-operation="unfollow-project" href="/proyectos_seguidos">Dejar de seguir</a>'
+            text: '<a id="unfollow-project" data-project="{{ nid }}" data-operation="unfollow-project" href="/proyectos_seguidos">Dejar de seguir</a>'
             make_link: false
             path: ''
             absolute: false

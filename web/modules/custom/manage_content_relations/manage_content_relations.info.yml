@@ -1,5 +1,0 @@
-name: Manage Content Relations
-type: module
-description: Allows to control the content relations for each user
-core: 8.x
-package: LeyesEnLasRedes

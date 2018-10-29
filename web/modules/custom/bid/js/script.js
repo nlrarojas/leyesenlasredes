@@ -1,6 +1,6 @@
 (function ($, Drupal) {
   $(document).ready(function () {
-    $(".use-ajax.button").on("click", function (event) {
+    /*$(".use-ajax.button").on("click", function (event) {
       event.preventDefault();
 
       const project = $(this).data("project");
@@ -28,36 +28,13 @@
         Drupal.dialog($myDialog, {
           title: '¿Desea dejar de seguir este tema?'
         }).showModal();
-      } else if (operation == "follow-project") {
-        var $myDialog = $('<div><form class="form-confirmation-trucker" action="" method="post" id="form-confirmation-trucker" accept-charset="UTF-8">\n' +
-          '  <p>' + 'El proyecto se añadirá a sus proyectos seguidos.</p>\n' +
-          '  <button class="button js-form-submit form-submit btn-success btn" data-project="' + project + '" data-operation="' + operation + '" type="button" id="follow-project" name="op" value="Confirmar">Aceptar</button>\n' +
-          '  <button class="button js-form-submit form-submit btn-danger btn icon-before" type="button" id="cancel-confirmation-trucker" name="op" value="Cancelar">\n' +
-          '      <span class="icon glyphicon glyphicon-remove" aria-hidden="true"></span>Cancelar\n' +
-          '  </button>\n' +
-          '</form></div>').appendTo('body');
-        Drupal.dialog($myDialog, {
-          title: '¿Desea seguir este proyecto?'
-        }).showModal();
-      } else if (operation == "unfollow-project") {
-        var $myDialog = $('<div><form class="form-confirmation-trucker" action="" method="post" id="form-confirmation-trucker" accept-charset="UTF-8">\n' +
-          '  <p>' + 'El proyecto se quitará de sus proyectos seguidos.</p>\n' +
-          '  <button class="button js-form-submit form-submit btn-success btn" data-project="' + project + '" data-operation="' + operation + '" type="button" id="follow-project" name="op" value="Confirmar">Aceptar</button>\n' +
-          '  <button class="button js-form-submit form-submit btn-danger btn icon-before" type="button" id="cancel-confirmation-trucker" name="op" value="Cancelar">\n' +
-          '      <span class="icon glyphicon glyphicon-remove" aria-hidden="true"></span>Cancelar\n' +
-          '  </button>\n' +
-          '</form></div>').appendTo('body');
-        Drupal.dialog($myDialog, {
-          title: '¿Desea dejar de seguir este proyecto?'
-        }).showModal();
       }
     });
 
     $(document).on("click", "#cancel-confirmation-trucker", function (event) {
       event.preventDefault();
-      alert("a");
       $('button.close').click();
-    });
+    });*/
 
     $(document).on("click", "#follow-topic", function (event) {
       event.preventDefault();
@@ -65,10 +42,10 @@
       const topic = $(this).data("project");      
 
       $.ajax({
-        url: '/call/ajax/bid',
+        url: '/call/ajax/follow-topic',
         type: 'POST',
         data: {
-          carga: topic
+          topic: topic
         },
         success: function (response) {             
           location.reload();
@@ -85,10 +62,10 @@
       const topic = $(this).data("project");      
 
       $.ajax({
-        url: '/call/ajax/accept-nomination',
+        url: '/call/ajax/unfollow-topic',
         type: 'POST',
         data: {
-          carga: topic          
+          topic: topic
         },
         success: function (response) {                
           location.reload();
@@ -102,18 +79,36 @@
     $(document).on("click", "#follow-project", function (event) {
       event.preventDefault();
 
-      const project = $(this).data("project");      
-
+      const project = $(this).data("project");
       $.ajax({
-        url: '/call/ajax/reject-nomination',
+        url: '/call/ajax/follow-project',
         type: 'POST',
         data: {
-          carga: project          
+          project: project
         },
         success: function (response) {          
           location.reload();
         },
         error: function (response) {          
+          alert('Hubo un error inesperado intentar más tarde');
+        }
+      });
+    });
+
+    $(document).on("click", "#unfollow-project", function (event) {
+      event.preventDefault();
+
+      const project = $(this).data("project");
+      $.ajax({
+        url: '/call/ajax/remove-project',
+        type: 'POST',
+        data: {
+          project: project
+        },
+        success: function (response) {
+          location.reload();
+        },
+        error: function (response) {
           alert('Hubo un error inesperado intentar más tarde');
         }
       });

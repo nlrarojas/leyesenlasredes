@@ -6,35 +6,34 @@ bid.current_options_form:
   requirements:
     _access: 'TRUE'
 
-
-bid.form_confirmation_trucker:
-  path: '/bid/form/form_confirmation_trucker'
+bid.form_follow_topic_modal:
+  path: '/call/ajax/follow-topic'
   defaults:
-    _form: '\Drupal\bid\Form\FormConfirmationTrucker'
-    _title: 'FormConfirmationTrucker'
+    _title: 'Modal Follow Topic'
+    _controller: '\Drupal\bid\Controller\ModalFormManageRelationsController::followTopic'
   requirements:
     _access: 'TRUE'
 
-bid.form_confirmation_trucker_modal:
-  path: '/call/ajax/bid'
+bid.form_unfollow_topic_modal:
+  path: '/call/ajax/unfollow-topic'
   defaults:
-    _title: 'Modal Confirm Trucker'
-    _controller: '\Drupal\bid\Controller\ModalFormConfirmationTruckerController::confirmTrucker'
+    _title: 'Modal Unfollow Topic'
+    _controller: '\Drupal\bid\Controller\ModalFormManageRelationsController::unfollowTopic'
   requirements:
     _access: 'TRUE'
 
-bid.form_accept_nomination_trucker_modal:
-  path: '/call/ajax/accept-nomination'
+bid.form_follow_project_modal:
+  path: '/call/ajax/follow-project'
   defaults:
-    _title: 'Modal Accept Nomination Trucker'
-    _controller: '\Drupal\bid\Controller\ModalFormConfirmationTruckerController::acceptNominationTrucker'
+    _title: 'Modal Follow Project'
+    _controller: '\Drupal\bid\Controller\ModalFormManageRelationsController::followProject'
   requirements:
     _access: 'TRUE'
 
-bid.form_reject_nomination_trucker_modal:
-  path: '/call/ajax/reject-nomination'
+bid.form_remove-project_modal:
+  path: '/call/ajax/remove-project'
   defaults:
-    _title: 'Modal Reject Nomination Trucker'
-    _controller: '\Drupal\bid\Controller\ModalFormConfirmationTruckerController::rejectNominationTrucker'
+    _title: 'Modal Remove project'
+    _controller: '\Drupal\bid\Controller\ModalFormManageRelationsController::removeProject'
   requirements:
     _access: 'TRUE'

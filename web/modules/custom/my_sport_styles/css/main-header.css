@@ -12,3 +12,7 @@ aside.main-sidebar {
   color: white;
   text-align: left !important;
 }
+
+.input-group {
+  padding-top: 0.5em;
+}

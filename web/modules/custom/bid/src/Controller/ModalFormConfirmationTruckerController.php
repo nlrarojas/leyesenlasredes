@@ -126,20 +126,18 @@ class ModalFormConfirmationTruckerController extends ControllerBase {
    * @return \Symfony\Component\HttpFoundation\Response
    */
   public function rejectNominationTrucker(Request $request) {
-
     if ($request->isXmlHttpRequest()) {
       $response = new JsonResponse();
 
-      $cargaID = $request->request->get('carga');
-      $nodeCarga = Node::load($cargaID);
-      $ofertaId = $nodeCarga->get('field_carga_ofert')->first()->getValue()['target_id'];
-      $nodeOferta = Node::load($ofertaId);
+      $projectID = $request->request->get('carga');
+      $projectNode = Node::load($cargaID);
+            
+      $uid = \Drupal::currentUser()->id();
 
-      $trucker = $this->getTruckerUser($ofertaId);
-
-      $ofertList = views_get_view_result('ofertas_de_cargas', 'block_2', $cargaID);
-      foreach ($ofertList as $ofert) {
-        $ofertListId = $ofert->_entity->id();
+      $projectAlreadyAdded = false;
+      $projectList = views_get_view_result('proyectos_seguidos', 'page_1', $uid);
+      foreach ($projectList as $project) {
+        $ofertListId = $project->_entity->id();
         if ($ofertListId != $ofertaId) {
           $ofertNode = Node::load($ofertListId);
           $ofertNode->get('moderation_state')->value = 'oferta_nominada';
@@ -147,27 +145,15 @@ class ModalFormConfirmationTruckerController extends ControllerBase {
         }
       }
 
-      if ($trucker) {
-        //$this->update_node($node_bid, $ofertaId);
-        // Published is carga_abierta state
-        // Remove the entity reference
-        $nodeCarga->field_carga_ofert = array();
-        $nodeCarga->save();
-
-        if ($nodeCarga->get('moderation_state')->value == 'published'){
-          $new_state = "published";
-          $nodeCarga->set('moderation_state', $new_state);
-          $nodeCarga->save();
-        }
-
-        if ($nodeOferta->get('moderation_state')->value == 'oferta_nominada'){
-          $new_state = "oferta_rechazada";
-          $nodeOferta->get('moderation_state')->value = $new_state;
-          //$nodeOferta->set('moderation_state', $new_state);
-          $nodeOferta->save();
-        }
-
-        drupal_set_message("Usted ha rechazado la aceptacion de la oferta al embarcador.");
+      if ($projectAlreadyAdded) {
+        $node = Node::create([
+          'type' => 'proyecto_seguido',
+          'title' => $projectNode->title(),        
+          'field_proyecto_seguido' => $projectNode,
+          'field_usuario' => $user,
+        ]);  
+        $node->save();
+        drupal_set_message("Ahora estas siguiente el proyecto: " . $projectNode->title());
       }
 
       return $response;

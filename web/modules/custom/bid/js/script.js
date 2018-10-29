@@ -30,7 +30,7 @@
         }).showModal();
       } else if (operation == "follow-project") {
         var $myDialog = $('<div><form class="form-confirmation-trucker" action="" method="post" id="form-confirmation-trucker" accept-charset="UTF-8">\n' +
-          '  <p>' + 'El proyecto se añadirá a sus temas de interés.</p>\n' +
+          '  <p>' + 'El proyecto se añadirá a sus proyectos seguidos.</p>\n' +
           '  <button class="button js-form-submit form-submit btn-success btn" data-project="' + project + '" data-operation="' + operation + '" type="button" id="follow-project" name="op" value="Confirmar">Aceptar</button>\n' +
           '  <button class="button js-form-submit form-submit btn-danger btn icon-before" type="button" id="cancel-confirmation-trucker" name="op" value="Cancelar">\n' +
           '      <span class="icon glyphicon glyphicon-remove" aria-hidden="true"></span>Cancelar\n' +
@@ -38,6 +38,17 @@
           '</form></div>').appendTo('body');
         Drupal.dialog($myDialog, {
           title: '¿Desea seguir este proyecto?'
+        }).showModal();
+      } else if (operation == "unfollow-project") {
+        var $myDialog = $('<div><form class="form-confirmation-trucker" action="" method="post" id="form-confirmation-trucker" accept-charset="UTF-8">\n' +
+          '  <p>' + 'El proyecto se quitará de sus proyectos seguidos.</p>\n' +
+          '  <button class="button js-form-submit form-submit btn-success btn" data-project="' + project + '" data-operation="' + operation + '" type="button" id="follow-project" name="op" value="Confirmar">Aceptar</button>\n' +
+          '  <button class="button js-form-submit form-submit btn-danger btn icon-before" type="button" id="cancel-confirmation-trucker" name="op" value="Cancelar">\n' +
+          '      <span class="icon glyphicon glyphicon-remove" aria-hidden="true"></span>Cancelar\n' +
+          '  </button>\n' +
+          '</form></div>').appendTo('body');
+        Drupal.dialog($myDialog, {
+          title: '¿Desea dejar de seguir este proyecto?'
         }).showModal();
       }
     });
@@ -80,6 +91,26 @@
           carga: topic          
         },
         success: function (response) {                
+          location.reload();
+        },
+        error: function (response) {          
+          alert('Hubo un error inesperado intentar más tarde');
+        }
+      });
+    });
+
+    $(document).on("click", "#follow-project", function (event) {
+      event.preventDefault();
+
+      const project = $(this).data("project");      
+
+      $.ajax({
+        url: '/call/ajax/reject-nomination',
+        type: 'POST',
+        data: {
+          carga: project          
+        },
+        success: function (response) {          
           location.reload();
         },
         error: function (response) {          

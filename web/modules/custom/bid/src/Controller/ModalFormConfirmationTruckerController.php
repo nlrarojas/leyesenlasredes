@@ -20,24 +20,34 @@ class ModalFormConfirmationTruckerController extends ControllerBase {
     if ($request->isXmlHttpRequest()) {
       $response = new JsonResponse();
 
-      $cargaID = $request->request->get('carga');
+      $topicID = $request->request->get('carga');
       $ofertaId = null;
 
-      $topic = Term::load($cargaID);
+      $topic = Term::load($topicID);
 
       $uid = \Drupal::currentUser()->id();
       $user = User::load($uid);
 
-      $node = Node::create([
-        'type' => 'mis_temas_de_interes',
-        'title' => $topic->getName(),        
-        'field_tema' => $topic,
-        'field_usuario_tema' => $user,
-      ]);  
+      /*$topics = views_get_view_result('mis_temas_de_interes', 'page_1', $uid);
+      $isTopicAdded = false;
+      foreach ($topics as $topic) {
+        if ($topic->get('field_tema')->getValue() == $topicID) {
+          $isTopicAdded = true;
+        }
+      }
 
-      $node->save();
-          
-      drupal_set_message("Ahora estas siguiente el tema: " . $topic->getName());
+      if (!$isTopicAdded) {*/
+        $node = Node::create([
+          'type' => 'mis_temas_de_interes',
+          'title' => $topic->getName(),        
+          'field_tema' => $topic,
+          'field_usuario_tema' => $user,
+        ]);  
+        $node->save();
+        drupal_set_message("Ahora estas siguiente el tema: " . $topic->getName());
+      //}   
+
+      //drupal_set_message("El tema: " . $topic->getName() . " ya está en sus lista de temas.");
       
       return $response;
     }

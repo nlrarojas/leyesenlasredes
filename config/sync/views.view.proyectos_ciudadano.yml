@@ -181,7 +181,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a id="followTopicButton" data-taxonomy={{ nid }} >Seguir</a>'
+            text: '<a class="use-ajax button" data-project="{{ nid }}" data-operation="follow-project" href="/proyectos_seguidos">Seguir</a>'
             make_link: false
             path: ''
             absolute: false

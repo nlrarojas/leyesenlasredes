@@ -199,7 +199,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a id="followTopicButton" data-taxonomy={{ tid }} >Seguir</a>'
+            text: '<a id="follow-topic" data-project="{{ tid }}" data-operation="follow-topic" href="/mis_temas_interes">Seguir</a>'
             make_link: false
             path: ''
             absolute: false
@@ -279,6 +279,7 @@ display:
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
+      use_ajax: true
     cache_metadata:
       max-age: -1
       contexts:

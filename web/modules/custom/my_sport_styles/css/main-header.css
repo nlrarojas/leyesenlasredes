@@ -7,7 +7,7 @@ aside.main-sidebar {
   height: 100%;
 }
 
-.btn-block{ 
+.btn-block{
   background-color: #3c8dbc !important;
   color: white;
   text-align: left !important;
@@ -15,4 +15,8 @@ aside.main-sidebar {
 
 .input-group {
   padding-top: 0.5em;
+}
+
+#u_0_0 {
+  width: 100% !important;
 }

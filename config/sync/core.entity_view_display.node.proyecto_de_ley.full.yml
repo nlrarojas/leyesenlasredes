@@ -1,8 +1,9 @@
-uuid: 027a2916-6b0c-4850-98f7-e04f4da85e40
+uuid: 3a9d0ff0-e9e3-4e11-9c52-f202b91747d9
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.full
     - field.field.node.proyecto_de_ley.field_atestados
     - field.field.node.proyecto_de_ley.field_descripcion
     - field.field.node.proyecto_de_ley.field_estado
@@ -17,10 +18,10 @@ dependencies:
     - file
     - text
     - user
-id: node.proyecto_de_ley.default
+id: node.proyecto_de_ley.full
 targetEntityType: node
 bundle: proyecto_de_ley
-mode: default
+mode: full
 content:
   field_atestados:
     weight: 104
@@ -90,7 +91,7 @@ content:
     region: content
   links:
     weight: 100
-    region: content
     settings: {  }
     third_party_settings: {  }
+    region: content
 hidden: {  }

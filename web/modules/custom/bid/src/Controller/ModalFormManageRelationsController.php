@@ -43,7 +43,7 @@ class ModalFormManageRelationsController extends ControllerBase {
           'title' => $topicNode->getName(),
           'field_tema' => $topicNode,
           'field_usuario_tema' => $user,
-        ]);  
+        ]);
         $node->save();
         drupal_set_message("Ahora estas siguiente el tema " . $topic->getName());
       } else {
@@ -68,7 +68,7 @@ class ModalFormManageRelationsController extends ControllerBase {
       $topicID = $request->request->get('topic');
       $nodeTopic = Node::load($topicID);
       $nodeTopic->delete();
-      
+
       drupal_set_message("Has dejado de seguir el tema: " . $nodeTopic->title());
 
       return $response;
@@ -101,7 +101,7 @@ class ModalFormManageRelationsController extends ControllerBase {
 
       $projectID = $request->request->get('project');
       $projectNode = Node::load($projectID);
-            
+
       $uid = \Drupal::currentUser()->id();
       $user = User::load($uid);
 
@@ -121,13 +121,84 @@ class ModalFormManageRelationsController extends ControllerBase {
           'title' => $projectNode->getTitle(),
           'field_proyecto_seguido' => $projectNode,
           'field_usuario' => $user,
-        ]);  
+        ]);
         $node->save();
         drupal_set_message("Ahora estas siguiente el proyecto " . $projectNode->title());
       } else {
         drupal_set_message("Ya sigues el proyecto " . $projectNode->title());
       }
 
+      return $response;
+    }
+  }
+
+  /**
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *
+   * @return \Symfony\Component\HttpFoundation\Response
+   */
+  public function openVoting(Request $request) {
+    if ($request->isXmlHttpRequest()) {
+      $response = new JsonResponse();
+
+      $projectID = $request->request->get('project');
+      $projectNode = Node::load($projectID);
+
+      $status = Term::load(3);
+
+      $projectAlreadyAdded = false;
+      $projectList = views_get_view_result('votacion_proyectos', 'block_1');
+      foreach ($projectList as $project) {
+        $projectListId = $project->_entity->get('field_proyecto')->getValue()[0]['target_id'];
+        if ($projectListId == $projectID) {
+          $projectAlreadyAdded = true;
+          $project->_entity->set('field_estado_votacion', $status);
+          $project->_entity->save();
+          break;
+        }
+      }
+
+      if (!$projectAlreadyAdded) {
+        $node = Node::create([
+          'type' => 'votacion_proyecto_de_ley',
+          'title' => $projectNode->getTitle(),
+          'field_estado_votacion' => $status,
+          'field_proyecto' => $projectNode,
+          'field_votos_a_favor' => 0,
+          'field_votos_en_contra' => 0,
+        ]);
+        $node->save();
+        drupal_set_message("Ahora estas siguiente el proyecto " . $projectNode->title());
+      } else {
+        drupal_set_message("Ya existe una votación abierta " . $projectNode->title());
+      }
+      return $response;
+    }
+  }
+
+/**
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *
+   * @return \Symfony\Component\HttpFoundation\Response
+   */
+  public function closeVoting(Request $request) {
+    if ($request->isXmlHttpRequest()) {
+      $response = new JsonResponse();
+
+      $projectID = $request->request->get('project');
+      $projectNode = Node::load($projectID);
+
+      $projectList = views_get_view_result('votacion_proyectos', 'block_1');
+      foreach ($projectList as $project) {
+        $projectListId = $project->_entity->get('field_proyecto')->getValue()[0]['target_id'];
+        if ($projectListId == $projectID) {
+          $status = Term::load(8);
+          $project->_entity->set('field_estado_votacion', $status);
+          $project->_entity->save();
+          break;
+        }
+      }
+      drupal_set_message("Ha cerrado la votación del proyecto " . $projectNode->title());
       return $response;
     }
   }

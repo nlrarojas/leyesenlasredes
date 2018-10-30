@@ -37,3 +37,19 @@ bid.form_remove-project_modal:
     _controller: '\Drupal\bid\Controller\ModalFormManageRelationsController::removeProject'
   requirements:
     _access: 'TRUE'
+
+bid.form_open-voting_modal:
+  path: '/call/ajax/open-voting'
+  defaults:
+    _title: 'Modal Open Voting'
+    _controller: '\Drupal\bid\Controller\ModalFormManageRelationsController::openVoting'
+  requirements:
+    _access: 'TRUE'
+
+bid.form_close-voting_modal:
+  path: '/call/ajax/close-voting'
+  defaults:
+    _title: 'Modal Close Voting'
+    _controller: '\Drupal\bid\Controller\ModalFormManageRelationsController::closeVoting'
+  requirements:
+    _access: 'TRUE'

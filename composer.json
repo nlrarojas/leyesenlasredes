@@ -23,6 +23,7 @@
         "drupal/bootstrap": "^3.13",
         "drupal/console": "^1.0.2",
         "drupal/core": "^8.6.0",
+        "drupal/easy_install": "^10.1",
         "drupal/facebook_comments": "^1.0",
         "drupal/nodeviewcount": "1.x-dev",
         "drupal/paragraphs": "^1.3",

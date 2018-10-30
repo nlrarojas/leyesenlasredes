@@ -43,10 +43,10 @@ display:
       exposed_form:
         type: basic
         options:
-          submit_button: Apply
+          submit_button: Filtrar
           reset_button: false
           reset_button_label: Reset
-          exposed_sorts_label: 'Sort by'
+          exposed_sorts_label: 'Ordenar por'
           expose_sort_order: true
           sort_asc_label: Asc
           sort_desc_label: Desc
@@ -265,7 +265,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a id="follow-project" data-project="{{ nid }}" data-operation="follow-project" href="/proyectos_seguidos">Seguir</a>'
+            text: '<a class="button btn-default btn" id="follow-project" data-project="{{ nid }}" data-operation="follow-project" href="/proyectos_seguidos">Seguir</a>'
             make_link: false
             path: ''
             absolute: false

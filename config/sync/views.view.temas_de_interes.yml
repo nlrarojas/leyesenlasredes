@@ -199,7 +199,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a id="follow-topic" data-project="{{ tid }}" data-operation="follow-topic" href="/mis_temas_interes">Seguir</a>'
+            text: '<a class="button btn-default btn" id="follow-topic" data-project="{{ tid }}" data-operation="follow-topic" href="/mis_temas_interes">Seguir</a>'
             make_link: false
             path: ''
             absolute: false

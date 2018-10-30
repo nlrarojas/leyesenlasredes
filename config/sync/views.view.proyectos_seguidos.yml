@@ -4,6 +4,8 @@ status: true
 dependencies:
   config:
     - node.type.proyecto_seguido
+    - user.role.administrator
+    - user.role.ciudadano
     - views.view.proyectos_ciudadano
   module:
     - node
@@ -24,9 +26,11 @@ display:
     position: 0
     display_options:
       access:
-        type: perm
+        type: role
         options:
-          perm: 'access content'
+          role:
+            administrator: administrator
+            ciudadano: ciudadano
       cache:
         type: tag
         options: {  }
@@ -213,7 +217,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a id="unfollow-project" data-project="{{ nid }}" data-operation="unfollow-project" href="/proyectos_seguidos">Dejar de seguir</a>'
+            text: '<a class="button btn-default btn" id="unfollow-project" data-project="{{ nid }}" data-operation="unfollow-project" href="/proyectos_seguidos">Dejar de seguir</a>'
             make_link: false
             path: ''
             absolute: false
@@ -324,7 +328,7 @@ display:
         - 'languages:language_interface'
         - url.query_args
         - 'user.node_grants:view'
-        - user.permissions
+        - user.roles
       tags: {  }
   page_1:
     display_plugin: page
@@ -341,5 +345,5 @@ display:
         - 'languages:language_interface'
         - url.query_args
         - 'user.node_grants:view'
-        - user.permissions
+        - user.roles
       tags: {  }

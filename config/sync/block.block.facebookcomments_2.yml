@@ -1,0 +1,32 @@
+uuid: b6c56cac-03ab-4517-8f3f-e2c4af0a7022
+langcode: en
+status: true
+dependencies:
+  module:
+    - facebook_comments
+    - node
+  theme:
+    - bootstrap
+id: facebookcomments_2
+theme: bootstrap
+region: content
+weight: -6
+provider: null
+plugin: facebook_comments
+settings:
+  id: facebook_comments
+  label: 'Facebook comments'
+  provider: facebook_comments
+  label_display: '0'
+  facebook_comments_style: light
+  facebook_comments_width: '208'
+  facebook_comments_width_fluid: 1
+  facebook_comments_amount: '5'
+visibility:
+  node_type:
+    id: node_type
+    bundles:
+      proyecto_de_ley: proyecto_de_ley
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

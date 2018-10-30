@@ -199,7 +199,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<a id="unfollow-topic" data-project="{{ nid }}" data-operation="unfollow-topic" href="/mis_temas_interes">Dejar de seguir</a>'
+            text: '<a class="button btn-default btn" id="unfollow-topic" data-project="{{ nid }}" data-operation="unfollow-topic" href="/mis_temas_interes">Dejar de seguir</a>'
             make_link: false
             path: ''
             absolute: false

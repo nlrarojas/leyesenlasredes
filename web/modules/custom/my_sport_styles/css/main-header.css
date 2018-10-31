@@ -20,3 +20,8 @@ aside.main-sidebar {
 #u_0_0 {
   width: 100% !important;
 }
+
+.input-group{
+  width: 30%;
+  float: right;
+}

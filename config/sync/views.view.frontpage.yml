@@ -43,7 +43,7 @@ display:
           admin_label: ''
           empty: true
           tokenize: false
-          content: 'No sigues a ningún proyecto todavía<br><a href="/proyectos_seguidos">Ver proyectos</a>'
+          content: 'No existe ninguna votación'
           label: ''
           plugin_id: text_custom
         title:

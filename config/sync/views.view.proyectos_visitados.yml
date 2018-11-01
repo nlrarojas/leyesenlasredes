@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.storage.node.field_estado_votacion
     - field.storage.node.field_votos_a_favor
     - field.storage.node.field_votos_en_contra
     - node.type.proyecto_de_ley
@@ -318,6 +319,69 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
+        field_estado_votacion:
+          id: field_estado_votacion
+          table: node__field_estado_votacion
+          field: field_estado_votacion
+          relationship: reverse__node__field_proyecto
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: true
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
         nothing:
           id: nothing
           table: views
@@ -329,7 +393,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "<br><br>\r\n<a href=\"#\" style=\"color: green;\">{{ field_votos_a_favor }}&nbsp;&nbsp;<span class=\"glyphicon glyphicon-thumbs-up\"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \r\n<a href=\"#\" style=\"color: red;\">{{ field_votos_en_contra }}&nbsp;&nbsp;<span class=\"glyphicon glyphicon-thumbs-down\"></span></a>"
+            text: "{% if field_estado_votacion %}\r\n  {% if field_estado_votacion|striptags|trim == \"En proceso\" %}\r\n    <br><br>\r\n    <a href=\"#\" style=\"color: green;\">{{ field_votos_a_favor }}&nbsp;&nbsp;<span class=\"glyphicon glyphicon-thumbs-up\"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \r\n    <a href=\"#\" style=\"color: red;\">{{ field_votos_en_contra }}&nbsp;&nbsp;<span class=\"glyphicon glyphicon-thumbs-down\"></span></a>\r\n  {% endif %}\r\n{% endif %}"
             make_link: false
             path: ''
             absolute: false
@@ -378,7 +442,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '<br><a class="button btn-primary btn" href="/node/{{ nid }}">Ver votación</a>'
+            text: "{% if field_estado_votacion %}\r\n  {% if field_estado_votacion|striptags|trim == \"En proceso\" %}\r\n    <br><a class=\"button btn-primary btn\" href=\"/node/{{ nid }}\">Ver votación</a>\r\n  {% endif %}\r\n{% else %}\r\n<br><p class=\"color: red;\">No existe votación en proceso.</p>\r\n{% endif %}"
             make_link: false
             path: ''
             absolute: false
@@ -573,6 +637,7 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:field.storage.node.field_estado_votacion'
         - 'config:field.storage.node.field_votos_a_favor'
         - 'config:field.storage.node.field_votos_en_contra'
   block_1:
@@ -591,5 +656,6 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:field.storage.node.field_estado_votacion'
         - 'config:field.storage.node.field_votos_a_favor'
         - 'config:field.storage.node.field_votos_en_contra'

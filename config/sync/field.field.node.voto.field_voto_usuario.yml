@@ -1,0 +1,36 @@
+uuid: 1f69041d-6c81-4af2-a29a-3e57b91c2c57
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_voto_usuario
+    - node.type.voto
+  module:
+    - unique_field_ajax
+third_party_settings:
+  unique_field_ajax:
+    unique: 0
+    per_lang: 0
+    use_ajax: 0
+    message: ''
+id: node.voto.field_voto_usuario
+field_name: field_voto_usuario
+entity_type: node
+bundle: voto
+label: 'voto usuario'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings:
+    include_anonymous: true
+    filter:
+      type: _none
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

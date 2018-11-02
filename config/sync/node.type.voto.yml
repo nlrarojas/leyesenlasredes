@@ -1,0 +1,18 @@
+uuid: 24e74440-69fe-4b49-aa2f-9517808cbdba
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: Voto
+type: voto
+description: 'Registro de un voto realizado por un ciudadano a un respectivo proyecto'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: true

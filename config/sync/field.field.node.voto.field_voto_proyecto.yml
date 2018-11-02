@@ -1,0 +1,36 @@
+uuid: 0e79b85b-866d-424c-8a92-4a85ec712a53
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_voto_proyecto
+    - node.type.proyecto_de_ley
+    - node.type.voto
+  module:
+    - unique_field_ajax
+third_party_settings:
+  unique_field_ajax:
+    unique: 0
+    per_lang: 0
+    use_ajax: 0
+    message: ''
+id: node.voto.field_voto_proyecto
+field_name: field_voto_proyecto
+entity_type: node
+bundle: voto
+label: 'voto proyecto'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      proyecto_de_ley: proyecto_de_ley
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

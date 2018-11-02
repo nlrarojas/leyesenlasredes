@@ -1,0 +1,20 @@
+uuid: e0d3e84b-a2f8-4a5d-ac4b-0603c2e8ff00
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - node.type.voto
+  module:
+    - user
+id: node.voto.teaser
+targetEntityType: node
+bundle: voto
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

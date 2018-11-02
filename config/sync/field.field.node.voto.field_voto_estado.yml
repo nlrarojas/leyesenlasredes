@@ -1,0 +1,23 @@
+uuid: cec16db2-eea7-4ff1-a99f-ebed222f24b8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_voto_estado
+    - node.type.voto
+id: node.voto.field_voto_estado
+field_name: field_voto_estado
+entity_type: node
+bundle: voto
+label: 'voto estado'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Ha votado'
+  off_label: 'No ha votado'
+field_type: boolean

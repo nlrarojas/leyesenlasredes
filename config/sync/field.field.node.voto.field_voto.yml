@@ -1,0 +1,23 @@
+uuid: fea083a2-4f60-431b-a2af-b6a7da4c04f0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_voto
+    - node.type.voto
+id: node.voto.field_voto
+field_name: field_voto
+entity_type: node
+bundle: voto
+label: voto
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Voto a favor'
+  off_label: 'Voto en contra'
+field_type: boolean

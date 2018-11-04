@@ -194,15 +194,13 @@
     $(document).on("click", "#vote-up", function (event) {
       event.preventDefault();
 
-      const project = $(this).data("project");
-      const user = $(this).data("user");
+      const project = $(this).data("project");      
       
       $.ajax({
         url: '/call/ajax/vote-up',
         type: 'POST',
         data: {
-          project: project,
-          user: user          
+          project: project           
         },
         success: function (response) {
           $("#vote-up").html(""+response.votesFavor+"&nbsp;&nbsp;<span class='glyphicon glyphicon-thumbs-up'></span>");
@@ -235,15 +233,13 @@
     $(document).on("click", "#vote-down", function (event) {
       event.preventDefault();
 
-      const project = $(this).data("project");
-      const user = $(this).data("user");
+      const project = $(this).data("project");      
       
       $.ajax({
         url: '/call/ajax/vote-down',
         type: 'POST',
         data: {
-          project: project,
-          user: user          
+          project: project
         },
         success: function (response) {
           $("#vote-up").html(""+response.votesFavor+"&nbsp;&nbsp;<span class='glyphicon glyphicon-thumbs-up'></span>");

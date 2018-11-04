@@ -206,14 +206,15 @@ class ModalFormManageRelationsController extends ControllerBase {
   public function voteUp(Request $request) {
     if ($request->isXmlHttpRequest()) {      
       $projectID = $request->request->get('project');
-      $userID = $request->request->get('user');
+      $uid = \Drupal::currentUser()->id();
+      $userID = User::load($uid);
       $votingProject = null;
 
-      $votesView = views_get_view_result('voto_usuario_proyecto', 'default', $projectID, $userID);
+      $votesView = views_get_view_result('voto_usuario_proyecto', 'default', $projectID, $uid);
 
       if (count($votesView) > 0) {
-        $votesFavor = $votesView[0]->_entity->get('field_votos_favor')->getValue()[0]['value'];
-        $votesNonFavor = $votesView[0]->_entity->get('field_votos_contra')->getValue()[0]['value'];
+        $votesFavor = $votesView[0]->_entity->get('field_votos_a_favor')->getValue()[0]['value'];
+        $votesNonFavor = $votesView[0]->_entity->get('field_votos_en_contra')->getValue()[0]['value'];
         $array = array("response" => 0, "votesFavor" => $votesFavor, "votesNonFavor" => $votesNonFavor);
       } else {
         $projectList = views_get_view_result('votacion_proyectos', 'block_1', $projectID);
@@ -221,11 +222,13 @@ class ModalFormManageRelationsController extends ControllerBase {
           $projectListId = $project->_entity->get('field_proyecto')->getValue()[0]['target_id'];
           if ($projectListId == $projectID) {
             $votingProject = $project;
+            //load node to update.
+            //$project->_entity->set('field_votos_a_favor', $project->_entity->get('field_votos_a_favor')->getValue()[0]['value'] + 1);
           }
         }
         $node = Node::create([
           'type' => 'voto',
-          'title' => 'Voto '.$votingProject->getTitle().'/'.$userID,
+          'title' => 'Voto '.$votingProject->getTitle().'/'.$uid,
           'field_voto' => true,
           'field_voto_estado' => true,
           'field_voto_proyecto' => $projectID,
@@ -248,14 +251,15 @@ class ModalFormManageRelationsController extends ControllerBase {
   public function voteDown(Request $request) {
     if ($request->isXmlHttpRequest()) {      
       $projectID = $request->request->get('project');
-      $userID = $request->request->get('user');
+      $uid = \Drupal::currentUser()->id();
+      $userID = User::load($uid);
       $votingProject = null;
 
-      $votesView = views_get_view_result('voto_usuario_proyecto', 'default', $projectID, $userID);
+      $votesView = views_get_view_result('voto_usuario_proyecto', 'default', $projectID, $uid);
 
       if (count($votesView) > 0) {
-        $votesFavor = $votesView[0]->_entity->get('field_votos_favor')->getValue()[0]['value'];
-        $votesNonFavor = $votesView[0]->_entity->get('field_votos_contra')->getValue()[0]['value'];
+        $votesFavor = $votesView[0]->_entity->get('field_votos_a_favor')->getValue()[0]['value'];
+        $votesNonFavor = $votesView[0]->_entity->get('field_votos_en_contra')->getValue()[0]['value'];
         $array = array("response" => 0, "votesFavor" => $votesFavor, "votesNonFavor" => $votesNonFavor);
       } else {
         $projectList = views_get_view_result('votacion_proyectos', 'block_1', $projectID);
@@ -267,7 +271,7 @@ class ModalFormManageRelationsController extends ControllerBase {
         }
         $node = Node::create([
           'type' => 'voto',
-          'title' => 'Voto '.$votingProject->getTitle().'/'.$userID,
+          'title' => 'Voto '.$votingProject->getTitle().'/'.$uid,
           'field_voto' => false,
           'field_voto_estado' => true,
           'field_voto_proyecto' => $projectID,

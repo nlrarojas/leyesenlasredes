@@ -52,4 +52,20 @@ bid.form_close-voting_modal:
     _title: 'Modal Close Voting'
     _controller: '\Drupal\bid\Controller\ModalFormManageRelationsController::closeVoting'
   requirements:
+    _access: 'TRUE'    
+
+bid.form_vote-up_modal:
+  path: '/call/ajax/vote-up'
+  defaults:
+    _title: 'Modal Vote Up'
+    _controller: '\Drupal\bid\Controller\ModalFormManageRelationsController::voteUp'
+  requirements:
+    _access: 'TRUE'
+
+bid.form_vote-down_modal:
+  path: '/call/ajax/vote-down'
+  defaults:
+    _title: 'Modal Vote Down'
+    _controller: '\Drupal\bid\Controller\ModalFormManageRelationsController::voteDown'
+  requirements:
     _access: 'TRUE'

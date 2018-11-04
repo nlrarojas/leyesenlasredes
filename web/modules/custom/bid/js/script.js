@@ -1,41 +1,5 @@
 (function ($, Drupal) {
   $(document).ready(function () {
-    /*$(".use-ajax.button").on("click", function (event) {
-      event.preventDefault();
-
-      const project = $(this).data("project");
-      const operation = $(this).data("operation");
-
-      if (operation == "follow-topic") {
-        var $myDialog = $('<div><form class="form-confirmation-trucker" action="" method="post" id="form-confirmation-trucker" accept-charset="UTF-8">\n' +
-          '  <p>' + 'El tema se añadirá a sus temas de interés.</p>\n' +
-          '  <button class="button js-form-submit form-submit btn-success btn" data-project="' + project + '" data-operation="' + operation + '" type="button" id="follow-topic" name="op" value="Confirmar">Aceptar</button>\n' +
-          '  <button class="button js-form-submit form-submit btn-danger btn icon-before" type="button" id="cancel-confirmation-trucker" name="op" value="Cancelar">\n' +
-          '      <span class="icon glyphicon glyphicon-remove" aria-hidden="true"></span>Cancelar\n' +
-          '  </button>\n' +
-          '</form></div>').appendTo('body');
-        Drupal.dialog($myDialog, {
-          title: '¿Desea seguir este tema?'
-        }).showModal();
-      } else if (operation == "unfollow-topic") {
-        var $myDialog = $('<div><form class="form-confirmation-trucker" action="" method="post" id="form-confirmation-trucker" accept-charset="UTF-8">\n' +
-          '  <p>' + 'El tema se quitará de sus temas de interés.</p>\n' +
-          '  <button class="button js-form-submit form-submit btn-success btn" data-project="' + project + '" data-operation="' + operation + '" type="button" id="unfollow-topic" name="op" value="Confirmar">Aceptar</button>\n' +
-          '  <button class="button js-form-submit form-submit btn-danger btn icon-before" type="button" id="cancel-confirmation-trucker" name="op" value="Cancelar">\n' +
-          '      <span class="icon glyphicon glyphicon-remove" aria-hidden="true"></span>Cancelar\n' +
-          '  </button>\n' +
-          '</form></div>').appendTo('body');
-        Drupal.dialog($myDialog, {
-          title: '¿Desea dejar de seguir este tema?'
-        }).showModal();
-      }
-    });
-
-    $(document).on("click", "#cancel-confirmation-trucker", function (event) {
-      event.preventDefault();
-      $('button.close').click();
-    });*/
-
     $(document).on("click", "#follow-topic", function (event) {
       event.preventDefault();
 
@@ -48,7 +12,27 @@
           topic: topic
         },
         success: function (response) {
-          location.reload();
+          if (response.response === 1) {            
+            $("#navbar").after("<div style='width: 74.6%; margin: 0 auto; background: #d4edda; " + 
+                "color: #155724; border-color: #c3e6cb;;' class=alert alert-dismissible fade show role=alert>" +
+                "Ahora sigue el tema de interés." + 
+                "<button type=button class=close data-dismiss=alert aria-label=Close>" + 
+                  "<span aria-hidden=true>&times;</span>" + 
+                "</button>" +
+              "</div>");   
+            setTimeout(function() {
+              location.reload();
+            }, 3000);
+          } else { 
+            $("#navbar").after("<div style='width: 74.6%; margin: 0 auto; color: #856404;" +
+                "background-color: #fff3cd; border-color: #ffeeba;'" + 
+                "class=alert alert-dismissible fade show role=alert>" +
+                "Ya sigue este tema de interés." + 
+                "<button type=button class=close data-dismiss=alert aria-label=Close>" + 
+                  "<span aria-hidden=true>&times;</span>" + 
+                "</button>" +
+              "</div>");             
+          } 
         },
         error: function (response) {
           alert('Hubo un error inesperado intentar más tarde');
@@ -86,8 +70,28 @@
         data: {
           project: project
         },
-        success: function (response) {
-          location.reload();
+        success: function (response) {                    
+          if (response.response === 1) {            
+            $("#navbar").after("<div style='width: 74.6%; margin: 0 auto; background: #d4edda; " + 
+                "color: #155724; border-color: #c3e6cb;;' class=alert alert-dismissible fade show role=alert>" +
+                "Ahora sigue el proyecto." + 
+                "<button type=button class=close data-dismiss=alert aria-label=Close>" + 
+                  "<span aria-hidden=true>&times;</span>" + 
+                "</button>" +
+              "</div>");   
+            setTimeout(function() {
+              location.reload();
+            }, 3000);
+          } else { 
+            $("#navbar").after("<div style='width: 74.6%; margin: 0 auto; color: #856404;" +
+                "background-color: #fff3cd; border-color: #ffeeba;'" + 
+                "class=alert alert-dismissible fade show role=alert>" +
+                "Ya sigue este proyecto." + 
+                "<button type=button class=close data-dismiss=alert aria-label=Close>" + 
+                  "<span aria-hidden=true>&times;</span>" + 
+                "</button>" +
+              "</div>");             
+          } 
         },
         error: function (response) {
           alert('Hubo un error inesperado intentar más tarde');
@@ -125,7 +129,24 @@
           project: project
         },
         success: function (response) {
-          location.reload();
+          if (response.response === 1) {            
+            $("#navbar").after("<div style='width: 74.6%; margin: 0 auto; background: #d4edda; " + 
+                "color: #155724; border-color: #c3e6cb;;' class=alert alert-dismissible fade show role=alert>" +
+                "Votación iniciada." + 
+                "<button type=button class=close data-dismiss=alert aria-label=Close>" + 
+                  "<span aria-hidden=true>&times;</span>" + 
+                "</button>" +
+              "</div>");               
+          } else { 
+            $("#navbar").after("<div style='width: 74.6%; margin: 0 auto; color: #856404;" +
+                "background-color: #fff3cd; border-color: #ffeeba;'" + 
+                "class=alert alert-dismissible fade show role=alert>" +
+                "Ya existe una votación abierta." + 
+                "<button type=button class=close data-dismiss=alert aria-label=Close>" + 
+                  "<span aria-hidden=true>&times;</span>" + 
+                "</button>" +
+              "</div>");             
+          } 
         },
         error: function (response) {
           alert('Hubo un error inesperado intentar más tarde');
@@ -145,7 +166,106 @@
           project: project
         },
         success: function (response) {
-          location.reload();
+          if (response.response === 1) {            
+            $("#navbar").after("<div style='width: 74.6%; margin: 0 auto; background: #d4edda; " + 
+                "color: #155724; border-color: #c3e6cb;;' class=alert alert-dismissible fade show role=alert>" +
+                "Votación finalizada." + 
+                "<button type=button class=close data-dismiss=alert aria-label=Close>" + 
+                  "<span aria-hidden=true>&times;</span>" + 
+                "</button>" +
+              "</div>");               
+          } else { 
+            $("#navbar").after("<div style='width: 74.6%; margin: 0 auto; color: #856404;" +
+                "background-color: #fff3cd; border-color: #ffeeba;'" + 
+                "class=alert alert-dismissible fade show role=alert>" +
+                "No se puede cerrar la votación por qué ya está cerrada o no ha sido abierta." + 
+                "<button type=button class=close data-dismiss=alert aria-label=Close>" + 
+                  "<span aria-hidden=true>&times;</span>" + 
+                "</button>" +
+              "</div>");             
+          } 
+        },
+        error: function (response) {
+          alert('Hubo un error inesperado intentar más tarde');
+        }
+      });
+    });
+
+    $(document).on("click", "#vote-up", function (event) {
+      event.preventDefault();
+
+      const project = $(this).data("project");
+      const user = $(this).data("user");
+      
+      $.ajax({
+        url: '/call/ajax/vote-up',
+        type: 'POST',
+        data: {
+          project: project,
+          user: user          
+        },
+        success: function (response) {
+          $("#vote-up").html(""+response.votesFavor+"&nbsp;&nbsp;<span class='glyphicon glyphicon-thumbs-up'></span>");
+          $("#vote-down").html(""+response.votesNonFavor+"&nbsp;&nbsp;<span class='glyphicon glyphicon-thumbs-down'></span>");
+          if (response.response === 1) {            
+            $("#navbar").after("<div style='width: 74.6%; margin: 0 auto; background: #d4edda; " + 
+                "color: #155724; border-color: #c3e6cb;;' class=alert alert-dismissible fade show role=alert>" +
+                "Su voto ha sido registrado." + 
+                "<button type=button class=close data-dismiss=alert aria-label=Close>" + 
+                  "<span aria-hidden=true>&times;</span>" + 
+                "</button>" +
+              "</div>");               
+          } else { 
+            $("#navbar").after("<div style='width: 74.6%; margin: 0 auto; color: #856404;" +
+                "background-color: #fff3cd; border-color: #ffeeba;'" + 
+                "class=alert alert-dismissible fade show role=alert>" +
+                "Ya ha votado por este proyecto." + 
+                "<button type=button class=close data-dismiss=alert aria-label=Close>" + 
+                  "<span aria-hidden=true>&times;</span>" + 
+                "</button>" +
+              "</div>");             
+          } 
+        },
+        error: function (response) {
+          alert('Hubo un error inesperado intentar más tarde');
+        }
+      });
+    });
+
+    $(document).on("click", "#vote-down", function (event) {
+      event.preventDefault();
+
+      const project = $(this).data("project");
+      const user = $(this).data("user");
+      
+      $.ajax({
+        url: '/call/ajax/vote-down',
+        type: 'POST',
+        data: {
+          project: project,
+          user: user          
+        },
+        success: function (response) {
+          $("#vote-up").html(""+response.votesFavor+"&nbsp;&nbsp;<span class='glyphicon glyphicon-thumbs-up'></span>");
+          $("#vote-down").html(""+response.votesNonFavor+"&nbsp;&nbsp;<span class='glyphicon glyphicon-thumbs-down'></span>");
+          if (response.response === 1) {            
+            $("#navbar").after("<div style='width: 74.6%; margin: 0 auto; background: #d4edda; " + 
+                "color: #155724; border-color: #c3e6cb;;' class=alert alert-dismissible fade show role=alert>" +
+                "Su voto ha sido registrado." + 
+                "<button type=button class=close data-dismiss=alert aria-label=Close>" + 
+                  "<span aria-hidden=true>&times;</span>" + 
+                "</button>" +
+              "</div>");               
+          } else { 
+            $("#navbar").after("<div style='width: 74.6%; margin: 0 auto; color: #856404;" +
+                "background-color: #fff3cd; border-color: #ffeeba;'" + 
+                "class=alert alert-dismissible fade show role=alert>" +
+                "Ya ha votado por este proyecto." + 
+                "<button type=button class=close data-dismiss=alert aria-label=Close>" + 
+                  "<span aria-hidden=true>&times;</span>" + 
+                "</button>" +
+              "</div>");             
+          } 
         },
         error: function (response) {
           alert('Hubo un error inesperado intentar más tarde');

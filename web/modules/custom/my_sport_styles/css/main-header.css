@@ -25,3 +25,11 @@ aside.main-sidebar {
   width: 30%;
   float: right;
 }
+
+#vote-up {
+  color: green;
+}
+
+#vote-down {
+  color: red;
+}

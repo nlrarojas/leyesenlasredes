@@ -17,4 +17,8 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
-hidden: {  }
+hidden:
+  field_voto: true
+  field_voto_estado: true
+  field_voto_proyecto: true
+  field_voto_usuario: true

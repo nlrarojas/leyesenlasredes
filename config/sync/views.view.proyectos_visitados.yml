@@ -393,7 +393,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: "{% if field_estado_votacion %}\r\n  {% if field_estado_votacion|striptags|trim == \"En proceso\" %}\r\n    <br><br>\r\n    <a href=\"#\" style=\"color: green;\">{{ field_votos_a_favor }}&nbsp;&nbsp;<span class=\"glyphicon glyphicon-thumbs-up\"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \r\n    <a href=\"#\" style=\"color: red;\">{{ field_votos_en_contra }}&nbsp;&nbsp;<span class=\"glyphicon glyphicon-thumbs-down\"></span></a>\r\n  {% endif %}\r\n{% endif %}"
+            text: "{% if field_estado_votacion %}\r\n  {% if field_estado_votacion|striptags|trim == \"En proceso\" %}\r\n    <br><br>\r\n    <a id=\"vote-up\" style=\"color: green;\">{{ field_votos_a_favor }}&nbsp;&nbsp;<span class=\"glyphicon glyphicon-thumbs-up\"></span></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; \r\n    <a id=\"vote-down\" style=\"color: red;\">{{ field_votos_en_contra }}&nbsp;&nbsp;<span class=\"glyphicon glyphicon-thumbs-down\"></span></a>\r\n  {% endif %}\r\n{% endif %}"
             make_link: false
             path: ''
             absolute: false

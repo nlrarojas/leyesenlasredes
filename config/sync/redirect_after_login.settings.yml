@@ -1,0 +1,6 @@
+login_redirection:
+  anonymous: null
+  authenticated: /proyectos_principal
+  administrator: /proyectos_principal
+  legislador: /proyectos_principal
+  ciudadano: /proyectos_principal

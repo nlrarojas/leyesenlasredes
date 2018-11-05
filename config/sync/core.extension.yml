@@ -36,6 +36,7 @@ module:
   path: 0
   quickedit: 0
   rdf: 0
+  redirect_after_login: 0
   registration_role: 0
   search: 0
   shortcut: 0
